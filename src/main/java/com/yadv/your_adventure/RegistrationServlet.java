@@ -1,5 +1,6 @@
 package com.yadv.your_adventure;
 
+import com.yadv.your_adventure.db.*;
 import com.yadv.your_adventure.account.SignUpForm;
 
 import javax.servlet.ServletException;
@@ -32,6 +33,7 @@ public class RegistrationServlet extends HttpServlet {
                 request.getParameter("password_text_field"),
                 request.getParameter("confirmed_password_text_field"));
         LoadUsersData();
+        UserInfoManagerJDBC.InsertUser(signUpForm);
         request.setAttribute("handle", signUpForm.getHandle());
         request.getRequestDispatcher("/community.jsp").forward(request, response);
     }
