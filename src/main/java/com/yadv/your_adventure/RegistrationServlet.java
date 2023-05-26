@@ -1,7 +1,7 @@
 package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.account.LoginForm;
-import com.yadv.your_adventure.db.*;
+import com.yadv.your_adventure.dao.*;
 import com.yadv.your_adventure.account.SignUpForm;
 
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.yadv.your_adventure.db;
+package com.yadv.your_adventure.dao;
 
 import com.yadv.your_adventure.account.LoginForm;
 import com.yadv.your_adventure.account.SignUpForm;

@@ -1,4 +1,4 @@
-package com.yadv.your_adventure.db;
+package com.yadv.your_adventure.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
