@@ -52,7 +52,24 @@ function onLoad() {
 }
 
 function drawTerrain() {
-
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = e => {
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = readerEvent => {
+            if (canvas.getContext) {
+                let map = new Image();
+                map.src = file.name;
+                map.onload = function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(map, 0, 0);
+                };
+            }
+        }
+    }
+    input.click();
 }
 
 function clearPage() {
