@@ -27,5 +27,8 @@
     </label>
     <input type="submit" name="button" value="Confirm"/>
 </form>
+
+<h4>${register_status}</h4>
+
 </body>
 </html>

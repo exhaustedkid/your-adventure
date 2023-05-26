@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class PostgreSQLJDBC {
+public class TestJDBC {
     public static void main(String args[]) {
         Connection c = null;
         try {

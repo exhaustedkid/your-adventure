@@ -34,7 +34,8 @@ public class VerificationServlet extends HttpServlet {
             request.getRequestDispatcher("/community.jsp").forward(request, response);
         }
         else {
-            request.getRequestDispatcher("/index.jsp").forward(request, response); // tryagain.jsp
+            request.setAttribute("login_status", "Wrong handle or password");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
