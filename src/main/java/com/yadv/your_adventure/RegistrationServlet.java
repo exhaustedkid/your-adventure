@@ -41,6 +41,7 @@ public class RegistrationServlet extends HttpServlet {
             } else {
                 UserInfoManagerJDBC.InsertUser(signUpForm);
                 request.setAttribute("handle", signUpForm.getHandle());
+                request.setAttribute("page", 1);
                 request.getRequestDispatcher("/community.jsp").forward(request, response);
             }
         } else {

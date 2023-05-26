@@ -1,7 +1,6 @@
 package com.yadv.your_adventure.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class TableFabricJDBC {
@@ -40,8 +39,9 @@ public class TableFabricJDBC {
             String sql;
             sql = "CREATE TABLE image (\n" +
                     "    image_id SERIAL PRIMARY KEY,\n" +
-                    "    path_to_image TEXT,\n" +
+                    "    image_code TEXT,\n" +
                     "    user_id INT\n" +
+                    "    publish_date TIMESTAMP\n" +
                     ");";
             stmt.executeUpdate(sql);
             c.commit();
