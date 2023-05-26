@@ -1,0 +1,47 @@
+div.header {
+    width: 100%;
+    font-size: 30px;
+    padding: 7px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    /*block-size: 25%;*/
+    background-color: antiquewhite;
+    margin: 0 0 15%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /*background-image: url("../background.png");*/
+    /*background-repeat: repeat;*/
+    /*backface-visibility: visible;*/
+    background: beige;
+}
+
+form.enter {
+    border: 1px solid black;
+    align-content: space-between;
+    flex-direction: column;
+    padding: 5px 10px 15px;
+}
+
+h2.enter {
+    text-align: center;
+}
+
+.block {
+    display: block;
+}
+
+.small_words {
+    color: grey;
+    font-size: 75%;
+    text-align: right;
+}
+
+#registration {
+    display: flex;
+    justify-content: space-between;
+}
