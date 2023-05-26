@@ -8,10 +8,7 @@ public class TableFabricJDBC {
     public static void CreateUserInfoTable(String table_name) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
@@ -26,6 +23,7 @@ public class TableFabricJDBC {
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -36,10 +34,7 @@ public class TableFabricJDBC {
     public static void CreateImagesTable(String table_name) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
@@ -51,6 +46,7 @@ public class TableFabricJDBC {
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());

@@ -1,7 +1,8 @@
 package com.yadv.your_adventure;
 
+import com.yadv.your_adventure.dao.ConnectionPool;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -9,13 +10,11 @@ public class TestJDBC {
     public static void main(String args[]) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
+
 //            sql = "DROP TABLE user_info;";
 //            stmt.executeUpdate(sql);
 
@@ -50,6 +49,7 @@ public class TestJDBC {
 //            }
             c.commit();
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
