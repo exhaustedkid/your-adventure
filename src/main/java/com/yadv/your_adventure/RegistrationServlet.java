@@ -1,5 +1,7 @@
 package com.yadv.your_adventure;
 
+import com.yadv.your_adventure.account.LoginForm;
+import com.yadv.your_adventure.db.*;
 import com.yadv.your_adventure.account.SignUpForm;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
@@ -23,20 +26,27 @@ public class RegistrationServlet extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("text_field");
-        System.out.println(email);
         SignUpForm signUpForm = new SignUpForm(request.getParameter("handle_text_field"),
                 request.getParameter("name_text_field"),
                 request.getParameter("surname_text_field"),
                 request.getParameter("email_text_field"),
                 request.getParameter("password_text_field"),
                 request.getParameter("confirmed_password_text_field"));
-        LoadUsersData();
-        request.setAttribute("handle", signUpForm.getHandle());
-        request.getRequestDispatcher("/community.jsp").forward(request, response);
-    }
-
-    void LoadUsersData() {
-
+        LoginForm loginForm = UserInfoManagerJDBC.GetLoginForm(signUpForm.getHandle());
+        if (loginForm.getHandle() == null) {
+            if (!Objects.equals(signUpForm.getPassword(), signUpForm.getConfirmedPassword())) {
+                System.out.println("Passwords dont match");
+                request.setAttribute("register_status", "Passwords dont match");
+                request.getRequestDispatcher("/registration.jsp").forward(request, response);
+            } else {
+                UserInfoManagerJDBC.InsertUser(signUpForm);
+                request.setAttribute("handle", signUpForm.getHandle());
+                request.getRequestDispatcher("/community.jsp").forward(request, response);
+            }
+        } else {
+            System.out.println("User already exists");
+            request.setAttribute("register_status", "User already exists");
+            request.getRequestDispatcher("/registration.jsp").forward(request, response);
+        }
     }
 }

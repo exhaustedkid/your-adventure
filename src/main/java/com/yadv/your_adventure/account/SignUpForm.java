@@ -23,7 +23,7 @@ public class SignUpForm {
         return email;
     }
 
-    public String getConfirmed_password() {
+    public String getConfirmedPassword() {
         return confirmed_password;
     }
 
