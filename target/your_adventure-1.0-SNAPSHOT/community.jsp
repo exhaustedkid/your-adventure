@@ -21,5 +21,11 @@
     <input type="hidden" name="page" value=${page}>
 </form>
 
+<form name="save" action="manage_img" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Submit">
+</form>
+
+
 </body>
 </html>

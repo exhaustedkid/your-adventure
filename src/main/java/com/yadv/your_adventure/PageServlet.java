@@ -42,7 +42,6 @@ public class PageServlet extends HttpServlet {
         request.setAttribute("handle2", images.get(1).getValue());
         request.setAttribute("pic3", images.get(2).getKey());
         request.setAttribute("handle3", images.get(2).getValue());
-        images.clear();
         request.getRequestDispatcher("/community.jsp").forward(request, response);
     }
 }
