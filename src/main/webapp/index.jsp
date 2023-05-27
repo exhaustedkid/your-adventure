@@ -32,6 +32,8 @@
     </form>
 </div>
 
+<h4>${login_status}</h4>
+
 <br/>
 </body>
 </html>

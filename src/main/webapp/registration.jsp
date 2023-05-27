@@ -48,5 +48,8 @@
         <input type="submit" name="button" value="Confirm"/>
     </div>
 </form>
+
+<h4>${register_status}</h4>
+
 </body>
 </html>

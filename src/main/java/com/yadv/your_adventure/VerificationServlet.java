@@ -1,13 +1,15 @@
 package com.yadv.your_adventure;
 
+import com.yadv.your_adventure.account.LoginForm;
+import com.yadv.your_adventure.dao.UserInfoManagerJDBC;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import com.yadv.your_adventure.account.LoginForm;
+import java.util.Objects;
 
 @WebServlet("/sign_in")
 public class VerificationServlet extends HttpServlet {
@@ -29,15 +31,20 @@ public class VerificationServlet extends HttpServlet {
                 request.getParameter("password_text_field"));
         if (VerifyEmail(loginForm)) {
             request.setAttribute("handle", loginForm.getHandle());
+            request.setAttribute("page", 1);
             request.getRequestDispatcher("/community.jsp").forward(request, response);
         }
-//        else {
-//            request.getRequestDispatcher("/tryagain.jsp").forward(request, response);
-//        }
+        else {
+            request.setAttribute("login_status", "Wrong handle or password");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
     }
 
     boolean VerifyEmail(LoginForm loginForm) {
-        //...
-        return true;
+        LoginForm requested = UserInfoManagerJDBC.GetLoginForm(loginForm.getHandle());
+        if (requested.getHandle() == null) {
+            return false;
+        }
+        return Objects.equals(requested.getPassword(), loginForm.getPassword());
     }
 }

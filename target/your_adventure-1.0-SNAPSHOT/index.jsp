@@ -22,6 +22,8 @@
     <input type="submit" name="button" value="Sign in"/>
 </form>
 
+<h4>${login_status}</h4>
+
 <br/>
 </body>
 </html>
