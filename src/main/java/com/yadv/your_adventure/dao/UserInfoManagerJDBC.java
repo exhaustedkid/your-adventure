@@ -1,4 +1,4 @@
-package com.yadv.your_adventure.db;
+package com.yadv.your_adventure.dao;
 
 import com.yadv.your_adventure.account.LoginForm;
 import com.yadv.your_adventure.account.SignUpForm;
@@ -12,10 +12,7 @@ public class UserInfoManagerJDBC {
     public static void InsertUser(SignUpForm form) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
@@ -28,6 +25,7 @@ public class UserInfoManagerJDBC {
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -38,10 +36,7 @@ public class UserInfoManagerJDBC {
     public static LoginForm GetLoginForm(String handle) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM user_info WHERE handle = " + "\047" + handle + "\047;");
@@ -49,6 +44,7 @@ public class UserInfoManagerJDBC {
                 return new LoginForm(rs.getString("handle"), rs.getString("password"));
             }
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

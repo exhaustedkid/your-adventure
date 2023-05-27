@@ -1,17 +1,13 @@
-package com.yadv.your_adventure.db;
+package com.yadv.your_adventure.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class TableFabricJDBC {
     public static void CreateUserInfoTable(String table_name) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
@@ -26,6 +22,7 @@ public class TableFabricJDBC {
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -36,21 +33,20 @@ public class TableFabricJDBC {
     public static void CreateImagesTable(String table_name) {
         Connection c = null;
         try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/your_adventure",
-                            "postgres", "2281337");
+            c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
             sql = "CREATE TABLE image (\n" +
                     "    image_id SERIAL PRIMARY KEY,\n" +
-                    "    path_to_image TEXT,\n" +
+                    "    image_code TEXT,\n" +
                     "    user_id INT\n" +
+                    "    publish_date TIMESTAMP\n" +
                     ");";
             stmt.executeUpdate(sql);
             c.commit();
             stmt.close();
+            c.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());

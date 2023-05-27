@@ -1,7 +1,7 @@
 package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.account.LoginForm;
-import com.yadv.your_adventure.db.UserInfoManagerJDBC;
+import com.yadv.your_adventure.dao.UserInfoManagerJDBC;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +31,7 @@ public class VerificationServlet extends HttpServlet {
                 request.getParameter("password_text_field"));
         if (VerifyEmail(loginForm)) {
             request.setAttribute("handle", loginForm.getHandle());
+            request.setAttribute("page", 1);
             request.getRequestDispatcher("/community.jsp").forward(request, response);
         }
         else {
