@@ -31,21 +31,20 @@ public class PictureManagerJDBC {
     }
 
     public static void SavePicture(String image, String handle, Date date) {
-//        Connection c = null;
-//        try {
-//            c = ConnectionPool.getConnection();
-//            c.setAutoCommit(false);
-//            Statement stmt = c.createStatement();
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM image INNER JOIN user_info USING(user_id) ORDER BY publish_date LIMIT " + count + "OFFSET " + from + ";");
-//            while (rs.next()) {
-//                images_and_handles.add(new Pair<>(rs.getString("image_code"), rs.getString("handle")));
-//            }
-//            stmt.close();
-//            c.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//            System.exit(0);
-//        }
+        Connection c = null;
+        try {
+            c = ConnectionPool.getConnection();
+            c.setAutoCommit(false);
+            Statement stmt = c.createStatement();
+            String sql = "INSERT INTO image(image_code, user_id, publish_date) VALUES " +
+                    "(" + "\047" + image + "\047" + ", " + "\047" + UserInfoManagerJDBC.GetUserId(handle) + "\047" + ", " + "\047" + date + "\047" + ");";
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 }

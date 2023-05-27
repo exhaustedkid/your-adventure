@@ -3,7 +3,9 @@ package com.yadv.your_adventure;
 import com.yadv.your_adventure.dao.ConnectionPool;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
 public class TestJDBC {
     public static void main(String args[]) {
@@ -13,6 +15,9 @@ public class TestJDBC {
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             String sql;
+
+            ResourceBundle resource = ResourceBundle.getBundle("config");
+            System.out.println(resource.getString("db.user"));
 
 //            sql = "DROP TABLE user_info;";
 //            stmt.executeUpdate(sql);
@@ -30,22 +35,22 @@ public class TestJDBC {
 //            sql = "INSERT INTO user_info VALUES (3, 'zolodimos', 'dr@mail.ru', 'Dmitry', 'Rubin');";
 //            stmt.executeUpdate(sql);
 
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM user_info;");
-//            while (rs.next()) {
-//                int id = rs.getInt("user_id");
-//                String name = rs.getString("name");
-//                String surname = rs.getString("surname");
-//                String handle = rs.getString("handle");
-//                String email = rs.getString("email");
-//                String password = rs.getString("password");
-//                System.out.println("ID = " + id);
-//                System.out.println("HANDLE = " + handle);
-//                System.out.println("NAME = " + name);
-//                System.out.println("SURNAME = " + surname);
-//                System.out.println("EMAIL = " + email);
-//                System.out.println("PASSWORD = " + password);
-//                System.out.println();
-//            }
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user_info;");
+            while (rs.next()) {
+                int id = rs.getInt("user_id");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                String handle = rs.getString("handle");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                System.out.println("ID = " + id);
+                System.out.println("HANDLE = " + handle);
+                System.out.println("NAME = " + name);
+                System.out.println("SURNAME = " + surname);
+                System.out.println("EMAIL = " + email);
+                System.out.println("PASSWORD = " + password);
+                System.out.println();
+            }
 
 //            sql = "CREATE TABLE image (\n" +
 //                    "    image_id SERIAL PRIMARY KEY,\n" +

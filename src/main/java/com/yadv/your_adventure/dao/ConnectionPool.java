@@ -4,17 +4,27 @@ import org.postgresql.ds.PGPoolingDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 import javax.sql.DataSource;
 public class ConnectionPool {
-    private static final String server_name = "localhost";
-    private static final String database_name = "your_adventure";
-    private static final String user = "postgres";
-    private static final String password = "2281337";
-    private static final int MAX_CONNECTIONS = 10;
+    private static final String server_name;
+    private static final String database_name;
+    private static final String user;
+    private static final String password;
+    private static final int MAX_CONNECTIONS;
+
+    static {
+        ResourceBundle resource = ResourceBundle.getBundle("config");
+        server_name = resource.getString("db.server_name");
+        database_name = resource.getString("db.database_name");
+        user = resource.getString("db.user");
+        password = resource.getString("db.password");
+        MAX_CONNECTIONS = Integer.parseInt(resource.getString("db.MAX_CONNECTIONS"));
+    }
     private static final DataSource dataSource;
     static {
         PGPoolingDataSource source = new PGPoolingDataSource();
-        source.setDataSourceName("A Data Source");
+        source.setDataSourceName("postgre connection pool");
         source.setServerNames(new String[]{
                 server_name
         });

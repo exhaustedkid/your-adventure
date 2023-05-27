@@ -33,6 +33,26 @@ public class UserInfoManagerJDBC {
         }
     }
 
+    public static int GetUserId(String handle) {
+        Connection c = null;
+        try {
+            c = ConnectionPool.getConnection();
+            c.setAutoCommit(false);
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user_info WHERE handle = " + "\047" + handle + "\047;");
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return 0;
+    }
+
     public static LoginForm GetLoginForm(String handle) {
         Connection c = null;
         try {
