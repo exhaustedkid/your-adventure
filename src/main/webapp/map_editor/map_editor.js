@@ -1,8 +1,9 @@
 let canvas = document.getElementById("draw");
 let ctx = canvas.getContext("2d");
 let color = "#000";
-let terrainType = "dirt"; // terrainTypeName = fileName for texture
 let brushSizeValue = 5;
+let globalTexture = new Image();
+let currentTool = 1; // 1 - pencil, 2 - add texture, 3 - eraser
 
 document.querySelector(".color-btn div").style.backgroundColor = color;
 
@@ -21,8 +22,16 @@ function onSave() {
     link.delete();
 }
 
-function onCloudSave() {
+function convert() {
+    let b64 = canvas.toDataURL();
+    let image = new Image();
+    image.src = b64;
+    return image;
+}
 
+
+function onCloudSave() {
+    return convert();
 }
 
 function toHome() {
@@ -31,27 +40,7 @@ function toHome() {
 }
 
 function onLoad() {
-    let input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = e => {
-        let file = e.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = readerEvent => {
-            if (canvas.getContext) {
-                let map = new Image();
-                map.src = file.webkitRelativePath;
-                map.onload = function () {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.drawImage(map, 0, 0);
-                };
-            }
-        }
-    }
-    input.click();
-}
-
-function drawTerrain() {
+    ctx.globalCompositeOperation = "source-over";
     let input = document.createElement('input');
     input.type = 'file';
     input.onchange = e => {
@@ -72,13 +61,37 @@ function drawTerrain() {
     input.click();
 }
 
+function addTexture() {
+    currentTool = 2;
+    ctx.globalCompositeOperation = "source-over";
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = e => {
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = readerEvent => {
+            globalTexture.src = file.name;
+        }
+    }
+    input.click();
+}
+
 function clearPage() {
     if (window.confirm("Do you really want to clear the page?")) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
 
-const erase = () => (ctx.globalCompositeOperation = "destination-out");
+function erase() {
+    currentTool = 3;
+    ctx.globalCompositeOperation = "destination-out";
+}
+
+function pencil() {
+    currentTool = 1;
+    ctx.globalCompositeOperation = "source-over"
+}
 
 function sizeList() {
     document.querySelector(".size-list").classList.toggle("show-list");
@@ -99,12 +112,6 @@ let pos = {
     y: 0
 };
 
-let offsetX = canvas.offsetLeft;
-let offsetY = canvas.offsetTop;
-function setPosition(e) {
-    pos.x = parseInt(e.clientX - offsetX);
-    pos.y = parseInt(e.clientY - offsetY);
-}
 
 function setActiveColor() {
     document.querySelector(".color-btn div").style.backgroundColor = color;
@@ -127,8 +134,21 @@ function colorPick() {
     setActiveColor();
 }
 
+let offsetX = canvas.offsetLeft;
+let offsetY = canvas.offsetTop;
+function setPosition(e) {
+    pos.x = parseInt(e.clientX - offsetX);
+    pos.y = parseInt(e.clientY - offsetY);
+    if (currentTool === 2) {
+        ctx.drawImage(globalTexture, pos.x, pos.y);
+    }
+}
+
 function draw(e) {
     if (e.buttons !== 1) {
+        return;
+    }
+    if (currentTool === 2) {
         return;
     }
     ctx.beginPath();
