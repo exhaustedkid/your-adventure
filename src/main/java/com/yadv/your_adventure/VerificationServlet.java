@@ -1,0 +1,43 @@
+package com.yadv.your_adventure;
+
+import com.yadv.your_adventure.account.LoginForm;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/sign_in")
+public class VerificationServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        LoginForm loginForm = new LoginForm(request.getParameter("hande_text_field"),
+                request.getParameter("password_text_field"));
+        if (Controller.VerifyLoginForm(loginForm)) {
+            request.setAttribute("handle", loginForm.getHandle());
+            request.setAttribute("page", 0); // 0-indexed
+            Controller.RequestContainer container = new Controller.RequestContainer(request);
+            Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community);
+            request.setAttribute("handle", loginForm.getHandle()); // bad
+            request.getRequestDispatcher("/community.jsp").forward(request, response);
+        }
+        else {
+            request.setAttribute("login_status", "Wrong handle or password");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+    }
+}
