@@ -31,7 +31,21 @@ function convert() {
 
 
 function onCloudSave() {
-    return convert();
+    let req = new XMLHttpRequest();
+    req.open("POST", "save");
+    let date = process_date(new Date);
+    alert('Your work published!');
+    req.send(handle + '\n' + date + '\n' + canvas.toDataURL());
+}
+
+function process_date(date) {
+    let month_correct = date.getUTCMonth() + 1;
+    return date.getFullYear() + '-'
+        + month_correct + '-'
+        + date.getDate() + ' '
+        + date.getHours() + ':'
+        + date.getMinutes() + ':'
+        + date.getSeconds(); // format: "2023-04-12 05:02:05";
 }
 
 function toHome() {

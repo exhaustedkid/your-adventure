@@ -1,8 +1,5 @@
 package com.yadv.your_adventure;
 
-import com.yadv.your_adventure.dao.PictureManagerJDBC;
-
-import javafx.util.Pair;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-@WebServlet("/load")
-public class PageServlet extends HttpServlet {
+@WebServlet("/drawer")
+public class DrawerLoaderServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,11 +22,9 @@ public class PageServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    static final int count = 3;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Controller.RequestContainer container = new Controller.RequestContainer(request);
-        Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community); // sweet dreams
-        request.getRequestDispatcher("/community.jsp").forward(request, response);
+        request.setAttribute("handle", request.getParameter("handle"));
+        request.getRequestDispatcher("/editor.jsp").forward(request, response);
     }
 }

@@ -23,23 +23,33 @@
 //        request.getParameter("handle")
 %>
 
-<h2>
-    <a href="editor.jsp">Create new map</a>
-</h2>
+<form name="profile" action="profile" method="POST">
+    <input type="submit" name="button" value="Your profile"/>
+    <input type="hidden" name="handle" value="${handle}">
+    <input type="hidden" name="page" value=0>
+</form>
 
-<h2>${handle1} ${pic1}</h2>
-<h2>${handle2} ${pic2}</h2>
-<h2>${handle3} ${pic3}</h2>
+
+<form name="drawer" action="drawer" method="POST">
+    <input type="submit" name="button" value="Create new map"/>
+    <input type="hidden" name="handle" value="${handle}">
+</form>
+
+
+<h2>${handle1}</h2>
+<img src="${pic1}" alt="blod" width="1200" height="1000" />
+<h2>${handle2}</h2>
+<img src="${pic2}" alt="blod" width="1200" height="1000" />
+<h2>${handle3}</h2>
+<img src="${pic3}" alt="blod" width="1200" height="1000" />
+
 
 <form name="load" action="load" method="POST">
     <input type="submit" name="button" value="Next page"/>
     <label>Page number ${page}</label>
     <input type="hidden" name="page" value=${page}>
+    <input type="hidden" name="handle" value=${handle}>
 </form>
-
-<div class="canvas-container">
-    <canvas id="draw"></canvas>
-</div>
 
 
 </body>

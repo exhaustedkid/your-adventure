@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet("/load")
-public class PageServlet extends HttpServlet {
+@WebServlet("/profile")
+public class UserPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,7 +30,8 @@ public class PageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Controller.RequestContainer container = new Controller.RequestContainer(request);
-        Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community); // sweet dreams
-        request.getRequestDispatcher("/community.jsp").forward(request, response);
+        Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.profile);
+        request.setAttribute("pictures_count", PictureManagerJDBC.GetPicturesCount(request.getParameter("handle")));
+        request.getRequestDispatcher("/your_works.jsp").forward(request, response);
     }
 }
