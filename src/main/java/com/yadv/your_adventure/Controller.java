@@ -1,7 +1,6 @@
 package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.account.LoginForm;
-import com.yadv.your_adventure.account.SignUpForm;
 import com.yadv.your_adventure.dao.PictureManagerJDBC;
 import com.yadv.your_adventure.dao.UserInfoManagerJDBC;
 import javafx.util.Pair;
@@ -67,7 +66,7 @@ public class Controller {
         return UserInfoManagerJDBC.GetLoginForm(handle);
     }
 
-    public static boolean VerifyEmail(LoginForm loginForm) {
+    public static boolean VerifyLoginForm(LoginForm loginForm) {
         LoginForm requested = UserInfoManagerJDBC.GetLoginForm(loginForm.getHandle());
         if (requested.getHandle() == null) {
             return false;
