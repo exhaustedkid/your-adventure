@@ -35,45 +35,33 @@ public class LoadPicServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        System.out.println("id param = " + request.getParameter("page"));
 
         ServletInputStream stream = request.getInputStream();
-
-//        ByteArrayOutputStream bufOutHandle = new ByteArrayOutputStream();
-//        byte[] handle_buf = new byte[128];
-//        bufOutHandle.write(stream.read(handle_buf), 0, ;
 
         int c = 0;
         StringBuilder handle = new StringBuilder();
 
-        while (c != 10) {
+        while (true) {
             c = stream.read();
+            if (c == 10) break;
             handle.append((char)c);
-        }; // c != (int)'\n'
+        } // c != (int)'\n'
 
-//        c = 0;
+        c = 0;
         StringBuilder date = new StringBuilder();
-//        date.append(stream.read());
-//        date.append(stream.read());
-//        date.append(stream.read());
-//        date.append(stream.read());
-        // year
-//        stream.read();
-//        stream.read();
-        // - (45 ind)
+        while (true) {
+            c = stream.read();
+            if (c == 10) break;
+            date.append((char)c);
+        } // c != (int)'\n'
 
         byte[] buf = new byte[128];
         ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
         for (int bytesRead = 0; bytesRead != -1; bytesRead = stream.read(buf)) {
             bufOut.write(buf, 0, bytesRead);
         }
-        System.out.println(handle);
-        System.out.println(date);
-        System.out.println(bufOut);
-//        PictureManagerJDBC.SavePicture(bufOut.toString(), "egor", "2023-04-12 05:02:05");
 
-
-
+        PictureManagerJDBC.SavePicture(bufOut.toString(), handle.toString(), date.toString());
         request.getRequestDispatcher("/community.jsp").forward(request, response);
     }
 }

@@ -72,11 +72,9 @@ public class TestJDBC {
 
 //            String image = "LOOOOOOl22";
 //            String date = "2023-04-12 05:02:05";
-//            sql = "INSERT INTO image(image_code, user_id, publish_date) VALUES " +
 
-//                    "(" + "\047" + image + "\047" + ", " + "\047" + UserInfoManagerJDBC.GetUserId(handle) + "\047" + ", " + "\047" + date + "\047" + ");";
 
-//                    "(" + "\047" + image + "\047" + ", " + "\047" + 1 + "\047" + ", " + "\047" + date + "\047" + ");";
+//            sql = "DELETE FROM image WHERE image_code NOT LIKE 'data%';";
 //            stmt.executeUpdate(sql);
 
 //            sql = "INSERT INTO image(image_code, user_id, publish_date) VALUES " +

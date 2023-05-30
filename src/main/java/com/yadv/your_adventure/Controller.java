@@ -14,11 +14,9 @@ public class Controller {
         profile,
         community
     }
-    public static void ConfigurePage(HttpServletRequest request, CONFIGURE_PAGE_MODE mode) {
-        System.out.println("on configure page");
-        System.out.println(request.getParameter("handle"));
-        String page_info = request.getParameter("page");
-        int page = 0;
+    public static void ConfigurePage(RequestContainer request, CONFIGURE_PAGE_MODE mode) {
+        String page_info = request.request.getParameter("page");
+        int page = 0; // here page 0-indexed
         if (page_info != null) {
             page = Integer.parseInt(page_info);
         }
@@ -27,19 +25,32 @@ public class Controller {
             images = PictureManagerJDBC.GetPictures(page * count_pictures_on_page, count_pictures_on_page);
         }
         if (mode == CONFIGURE_PAGE_MODE.profile) {
-            images = PictureManagerJDBC.GetUserPictures(request.getParameter("handle"), page * count_pictures_on_page, count_pictures_on_page);
+            images = PictureManagerJDBC.GetUserPictures(request.request.getParameter("handle"), page * count_pictures_on_page, count_pictures_on_page);
         }
-        if (images.size() < 3) {
-            System.out.println(images.size());
+        request.request.setAttribute("page", ++page);
+        request.request.setAttribute("handle", request.request.getParameter("handle"));
+        if (images.size() < 1) {
             return;
         }
-        request.setAttribute("page", ++page);
-        request.setAttribute("handle", request.getParameter("handle"));
-        request.setAttribute("pic1", images.get(0).getKey());
-        request.setAttribute("handle1", images.get(0).getValue());
-        request.setAttribute("pic2", images.get(1).getKey());
-        request.setAttribute("handle2", images.get(1).getValue());
-        request.setAttribute("pic3", images.get(2).getKey());
-        request.setAttribute("handle3", images.get(2).getValue());
+        request.request.setAttribute("pic1", images.get(0).getKey());
+        request.request.setAttribute("handle1", images.get(0).getValue());
+        if (images.size() < 2) {
+            return;
+        }
+        request.request.setAttribute("pic2", images.get(1).getKey());
+        request.request.setAttribute("handle2", images.get(1).getValue());
+        if (images.size() < 3) {
+            return;
+        }
+        request.request.setAttribute("pic3", images.get(2).getKey());
+        request.request.setAttribute("handle3", images.get(2).getValue());
+    }
+
+    public static class RequestContainer {
+        public HttpServletRequest request;
+
+        public RequestContainer(HttpServletRequest request) {
+            this.request = request;
+        }
     }
 }

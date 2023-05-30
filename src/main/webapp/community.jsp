@@ -26,7 +26,7 @@
 <form name="profile" action="profile" method="POST">
     <input type="submit" name="button" value="Your profile"/>
     <input type="hidden" name="handle" value="${handle}">
-    <input type="hidden" name="page" value=1>
+    <input type="hidden" name="page" value=0>
 </form>
 
 
@@ -48,6 +48,7 @@
     <input type="submit" name="button" value="Next page"/>
     <label>Page number ${page}</label>
     <input type="hidden" name="page" value=${page}>
+    <input type="hidden" name="handle" value=${handle}>
 </form>
 
 

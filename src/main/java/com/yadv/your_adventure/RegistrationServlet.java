@@ -41,7 +41,10 @@ public class RegistrationServlet extends HttpServlet {
             } else {
                 UserInfoManagerJDBC.InsertUser(signUpForm);
                 request.setAttribute("handle", signUpForm.getHandle());
-                request.setAttribute("page", 1);
+                request.setAttribute("page", 0);
+                Controller.RequestContainer container = new Controller.RequestContainer(request);
+                Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community);
+                request.setAttribute("handle", loginForm.getHandle()); // bad
                 request.getRequestDispatcher("/community.jsp").forward(request, response);
             }
         } else {

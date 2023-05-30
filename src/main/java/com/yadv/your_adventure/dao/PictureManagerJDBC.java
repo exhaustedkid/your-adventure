@@ -15,7 +15,7 @@ public class PictureManagerJDBC {
             c = ConnectionPool.getConnection();
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM image INNER JOIN user_info USING(user_id) ORDER BY publish_date LIMIT " + count + "OFFSET " + from + ";");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM image INNER JOIN user_info USING(user_id) ORDER BY publish_date DESC LIMIT " + count + "OFFSET " + from + ";");
             while (rs.next()) {
                 images_and_handles.add(new Pair<>(rs.getString("image_code"), rs.getString("handle")));
             }
@@ -37,7 +37,7 @@ public class PictureManagerJDBC {
             c.setAutoCommit(false);
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM image INNER JOIN user_info USING(user_id) " +
-                    "WHERE handle = " + "\047" + handle + "\047" + " ORDER BY publish_date LIMIT " + count + "OFFSET " + from + ";");
+                    "WHERE handle = " + "\047" + handle + "\047" + " ORDER BY publish_date DESC LIMIT " + count + "OFFSET " + from + ";");
             while (rs.next()) {
                 images_and_handles.add(new Pair<>(rs.getString("image_code"), rs.getString("handle")));
             }

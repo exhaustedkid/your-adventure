@@ -33,11 +33,8 @@
 </form>
 
 
-<%--<h2>${handle1}</h2>--%>
 <img src="${pic1}" alt="blod" width="1200" height="1000" />
-<%--<h2>${handle2}</h2>--%>
 <img src="${pic2}" alt="blod" width="1200" height="1000" />
-<%--<h2>${handle3}</h2>--%>
 <img src="${pic3}" alt="blod" width="1200" height="1000" />
 
 

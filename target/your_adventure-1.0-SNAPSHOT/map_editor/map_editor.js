@@ -31,25 +31,21 @@ function convert() {
 
 
 function onCloudSave() {
-    alert(handle);
     let req = new XMLHttpRequest();
     req.open("POST", "save");
-    // let date = process_date(Math.floor(Date.now() / 1000));
-    let date = process_date(Date.prototype.getDate());
-    let image = canvas.toDataURL();
-    // let data = "image=" + image + "&password=" + pwdVal
-    let data = handle + '\n' + date + '\n' + image;
-    req.send(data);
-    // req.send(canvas.toDataURL());
+    let date = process_date(new Date);
+    alert('Your work published!');
+    req.send(handle + '\n' + date + '\n' + canvas.toDataURL());
 }
 
 function process_date(date) {
+    let month_correct = date.getUTCMonth() + 1;
     return date.getFullYear() + '-'
-        + date.getUTCMonth() + '-'
-        + date.getUTCDay() + ' '
-        + date.getUTCHours() + ':'
-        + date.getUTCMinutes() + ':'
-        + date.getUTCSeconds(); // format: "2023-04-12 05:02:05";
+        + month_correct + '-'
+        + date.getDate() + ' '
+        + date.getHours() + ':'
+        + date.getMinutes() + ':'
+        + date.getSeconds(); // format: "2023-04-12 05:02:05";
 }
 
 function toHome() {
