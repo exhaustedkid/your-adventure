@@ -32,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
                 request.getParameter("email_text_field"),
                 request.getParameter("password_text_field"),
                 request.getParameter("confirmed_password_text_field"));
-        LoginForm loginForm = UserInfoManagerJDBC.GetLoginForm(signUpForm.getHandle());
+        LoginForm loginForm = Controller.GetLoginForm(signUpForm.getHandle());
         if (loginForm.getHandle() == null) {
             if (!Objects.equals(signUpForm.getPassword(), signUpForm.getConfirmedPassword())) {
                 System.out.println("Passwords dont match");
