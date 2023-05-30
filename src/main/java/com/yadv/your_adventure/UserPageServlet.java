@@ -31,7 +31,7 @@ public class UserPageServlet extends HttpServlet {
             throws ServletException, IOException {
         Controller.RequestContainer container = new Controller.RequestContainer(request);
         Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.profile);
-        request.setAttribute("pictures_count", PictureManagerJDBC.GetPicturesCount(request.getParameter("handle")));
+        request.setAttribute("pictures_count", Controller.GetPicturesCount(request.getParameter("handle")));
         request.getRequestDispatcher("/your_works.jsp").forward(request, response);
     }
 }

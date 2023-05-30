@@ -33,7 +33,7 @@ public class VerificationServlet extends HttpServlet {
             throws ServletException, IOException {
         LoginForm loginForm = new LoginForm(request.getParameter("hande_text_field"),
                 request.getParameter("password_text_field"));
-        if (VerifyEmail(loginForm)) {
+        if (Controller.VerifyEmail(loginForm)) {
             request.setAttribute("handle", loginForm.getHandle());
             request.setAttribute("page", 0); // 0-indexed
             Controller.RequestContainer container = new Controller.RequestContainer(request);
@@ -45,13 +45,5 @@ public class VerificationServlet extends HttpServlet {
             request.setAttribute("login_status", "Wrong handle or password");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
-    }
-
-    boolean VerifyEmail(LoginForm loginForm) {
-        LoginForm requested = UserInfoManagerJDBC.GetLoginForm(loginForm.getHandle());
-        if (requested.getHandle() == null) {
-            return false;
-        }
-        return Objects.equals(requested.getPassword(), loginForm.getPassword());
     }
 }

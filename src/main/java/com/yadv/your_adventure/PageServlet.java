@@ -30,7 +30,7 @@ public class PageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Controller.RequestContainer container = new Controller.RequestContainer(request);
-        Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community); // sweet dreams
+        Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community);
         request.getRequestDispatcher("/community.jsp").forward(request, response);
     }
 }

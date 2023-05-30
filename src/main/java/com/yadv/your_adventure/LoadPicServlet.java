@@ -61,7 +61,6 @@ public class LoadPicServlet extends HttpServlet {
             bufOut.write(buf, 0, bytesRead);
         }
 
-        PictureManagerJDBC.SavePicture(bufOut.toString(), handle.toString(), date.toString());
-        request.getRequestDispatcher("/community.jsp").forward(request, response);
+        Controller.SavePicture(bufOut.toString(), handle.toString(), date.toString());
     }
 }
