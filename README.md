@@ -37,7 +37,8 @@ be able to draw maps and save them on your device.
 - Database management system - postgreSQL;
 - Client-part is written in JavaScript. Also were used: JSP, JSTL, CSS;
 - Database is written in postgreSQL;
-- Everything is being logged via log4j.
+- Everything is being logged via log4j;
+- Service part tested via JUnit5.
 
 
 ## Integration
