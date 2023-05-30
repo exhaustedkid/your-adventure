@@ -26,7 +26,7 @@ your map and get some inspiration.
 If you don't want to create your own account, you can simply sign in as a ***Guest*** and still
 be able to draw maps and save them on your device.
 
-![Map editor interface](https://github.com/exhaustedkid/your-adventure/tree/dev/Resources/Screenshots/interface.png)
+![Map editor interface](https://github.com/exhaustedkid/your-adventure/blob/dev/Resources/Screenshots/interface.png)
 
 
 ## Technologies
@@ -37,7 +37,8 @@ be able to draw maps and save them on your device.
 - Database management system - postgreSQL;
 - Client-part is written in JavaScript. Also were used: JSP, JSTL, CSS;
 - Database is written in postgreSQL;
-- Everything is being logged via log4j.
+- Everything is being logged via log4j;
+- Service part tested via JUnit5.
 
 
 ## Integration
