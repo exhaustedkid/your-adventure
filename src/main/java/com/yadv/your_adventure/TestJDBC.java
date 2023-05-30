@@ -19,7 +19,7 @@ public class TestJDBC {
 
 //            sql = "DROP TABLE user_info;";
 //            stmt.executeUpdate(sql);
-
+//
 //            sql = "CREATE TABLE user_info (\n" +
 //                    "    user_id SERIAL PRIMARY KEY,\n" +
 //                    "    handle TEXT,\n" +
@@ -29,7 +29,7 @@ public class TestJDBC {
 //                    "    surname TEXT\n" +
 //                    ");";
 //            stmt.executeUpdate(sql);
-
+//
 //            sql = "INSERT INTO user_info VALUES (3, 'zolodimos', 'dr@mail.ru', 'Dmitry', 'Rubin');";
 //            stmt.executeUpdate(sql);
 
@@ -57,17 +57,17 @@ public class TestJDBC {
 //                    "    publish_date TIMESTAMP\n" +
 //                    ");";
 //            stmt.executeUpdate(sql);
-
-
+//
+//
 //            sql = "DROP TABLE image;";
 //            stmt.executeUpdate(sql);
-
+//
 //            sql = "INSERT INTO image(image_code, user_id, publish_date) VALUES " +
 //                    "('img1', 1, '2023-04-12 05:02:05'), " +
 //                    "('img2', 1, '2023-04-13 07:02:05'), " +
 //                    "('img3', 2, '2023-04-14 05:02:05'); ";
 //            stmt.executeUpdate(sql);
-
+//
 //            PictureManagerJDBC.SavePicture("asdasd", "egor", "2023-04-12 05:02:05");
 
 //            String image = "LOOOOOOl22";
