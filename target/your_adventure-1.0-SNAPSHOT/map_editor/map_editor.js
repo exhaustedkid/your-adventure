@@ -31,7 +31,25 @@ function convert() {
 
 
 function onCloudSave() {
-    return convert();
+    alert(handle);
+    let req = new XMLHttpRequest();
+    req.open("POST", "save");
+    // let date = process_date(Math.floor(Date.now() / 1000));
+    let date = process_date(Date.prototype.getDate());
+    let image = canvas.toDataURL();
+    // let data = "image=" + image + "&password=" + pwdVal
+    let data = handle + '\n' + date + '\n' + image;
+    req.send(data);
+    // req.send(canvas.toDataURL());
+}
+
+function process_date(date) {
+    return date.getFullYear() + '-'
+        + date.getUTCMonth() + '-'
+        + date.getUTCDay() + ' '
+        + date.getUTCHours() + ':'
+        + date.getUTCMinutes() + ':'
+        + date.getUTCSeconds(); // format: "2023-04-12 05:02:05";
 }
 
 function toHome() {

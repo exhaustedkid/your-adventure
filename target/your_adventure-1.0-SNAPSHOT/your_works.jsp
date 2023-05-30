@@ -18,17 +18,14 @@
 <jsp:include page="headers/app.jsp"/>
 <%
     if (request.getParameter("handle") != NULL) {
-      new String("...");
+        new String("...");
     }
 //        request.getParameter("handle")
 %>
 
-<form name="profile" action="profile" method="POST">
-    <input type="submit" name="button" value="Your profile"/>
-    <input type="hidden" name="handle" value="${handle}">
-    <input type="hidden" name="page" value=1>
-</form>
 
+<h2>You are ${handle}</h2>
+<h2>You have ${pictures_count} works</h2>
 
 <form name="drawer" action="drawer" method="POST">
     <input type="submit" name="button" value="Create new map"/>
@@ -36,18 +33,19 @@
 </form>
 
 
-<h2>${handle1}</h2>
+<%--<h2>${handle1}</h2>--%>
 <img src="${pic1}" alt="blod" width="1200" height="1000" />
-<h2>${handle2}</h2>
+<%--<h2>${handle2}</h2>--%>
 <img src="${pic2}" alt="blod" width="1200" height="1000" />
-<h2>${handle3}</h2>
+<%--<h2>${handle3}</h2>--%>
 <img src="${pic3}" alt="blod" width="1200" height="1000" />
 
 
-<form name="load" action="load" method="POST">
+<form name="profile" action="profile" method="POST">
     <input type="submit" name="button" value="Next page"/>
     <label>Page number ${page}</label>
     <input type="hidden" name="page" value=${page}>
+    <input type="hidden" name="handle" value=${handle}>
 </form>
 
 

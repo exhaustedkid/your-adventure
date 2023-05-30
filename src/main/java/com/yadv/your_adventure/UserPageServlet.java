@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet("/load")
-public class PageServlet extends HttpServlet {
+@WebServlet("/profile")
+public class UserPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,20 +34,16 @@ public class PageServlet extends HttpServlet {
         if (!page_info.isEmpty()) {
             page = Integer.parseInt(page_info);
         }
-        ArrayList<Pair<String, String>> images = PictureManagerJDBC.GetPictures((page - 1) * count, count);
+        ArrayList<Pair<String, String>> images = PictureManagerJDBC.GetUserPictures(request.getParameter("handle"), (page - 1) * count, count);
         request.setAttribute("page", ++page);
         request.setAttribute("handle", request.getParameter("handle"));
         request.setAttribute("pic1", images.get(0).getKey());
-        request.setAttribute("handle1", images.get(0).getValue());
         request.setAttribute("pic2", images.get(1).getKey());
-        request.setAttribute("handle2", images.get(1).getValue());
         request.setAttribute("pic3", images.get(2).getKey());
-        request.setAttribute("handle3", images.get(2).getValue());
 
+//        Controller.ConfigurePage(request, Controller.CONFIGURE_PAGE_MODE.profile);    sweat_dreams
 
-//        Controller.ConfigurePage(request, Controller.CONFIGURE_PAGE_MODE.community); sweet dreams
-
-
-        request.getRequestDispatcher("/community.jsp").forward(request, response);
+        request.setAttribute("pictures_count", PictureManagerJDBC.GetPicturesCount(request.getParameter("handle")));
+        request.getRequestDispatcher("/your_works.jsp").forward(request, response);
     }
 }
