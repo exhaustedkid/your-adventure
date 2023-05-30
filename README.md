@@ -48,6 +48,6 @@ To run project you need
 - configure file [config.properties](https://github.com/exhaustedkid/your-adventure/blob/dev/src/main/resources/config.properties)(use db.database_name of already existing database)
 - download dependencies using Maven in [pom.xml](https://github.com/exhaustedkid/your-adventure/blob/dev/pom.xml)
 - run file BeginJDBC to create server tables -- change filename, and testjdbc file --
-- edit configuration like this ![configurations](https://github.com/exhaustedkid/your-adventure/blob/dev/Resources/Screenshots/configuration.png)
-- set tomcat path ![tomcat_path](https://github.com/exhaustedkid/your-adventure/blob/dev/Resources/Screenshots/tomcat_path.png)
+- edit configuration like this ![configurations](https://github.com/exhaustedkid/your-adventure/blob/readme/Resources/Screenshots/configuration.png)
+- set tomcat path ![tomcat_path](https://github.com/exhaustedkid/your-adventure/blob/readme/Resources/Screenshots/tomcat_path.png)
 - run project
