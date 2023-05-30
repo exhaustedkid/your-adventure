@@ -32,24 +32,24 @@ public class TestJDBC {
 //
 //            sql = "INSERT INTO user_info VALUES (3, 'zolodimos', 'dr@mail.ru', 'Dmitry', 'Rubin');";
 //            stmt.executeUpdate(sql);
-//
-//            ResultSet rs = stmt.executeQuery("SELECT * FROM user_info;");
-//            while (rs.next()) {
-//                int id = rs.getInt("user_id");
-//                String name = rs.getString("name");
-//                String surname = rs.getString("surname");
-//                String handle = rs.getString("handle");
-//                String email = rs.getString("email");
-//                String password = rs.getString("password");
-//                System.out.println("ID = " + id);
-//                System.out.println("HANDLE = " + handle);
-//                System.out.println("NAME = " + name);
-//                System.out.println("SURNAME = " + surname);
-//                System.out.println("EMAIL = " + email);
-//                System.out.println("PASSWORD = " + password);
-//                System.out.println();
-//            }
-//
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user_info;");
+            while (rs.next()) {
+                int id = rs.getInt("user_id");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                String handle = rs.getString("handle");
+                String email = rs.getString("email");
+                String password = rs.getString("password");
+                System.out.println("ID = " + id);
+                System.out.println("HANDLE = " + handle);
+                System.out.println("NAME = " + name);
+                System.out.println("SURNAME = " + surname);
+                System.out.println("EMAIL = " + email);
+                System.out.println("PASSWORD = " + password);
+                System.out.println();
+            }
+
 //            sql = "CREATE TABLE image (\n" +
 //                    "    image_id SERIAL PRIMARY KEY,\n" +
 //                    "    image_code TEXT,\n" +
