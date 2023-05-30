@@ -1,9 +1,6 @@
 package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.account.LoginForm;
-import com.yadv.your_adventure.dao.PictureManagerJDBC;
-import com.yadv.your_adventure.dao.UserInfoManagerJDBC;
-import javafx.util.Pair;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.ref.Reference;
-import java.util.ArrayList;
-import java.util.Objects;
 
 @WebServlet("/sign_in")
 public class VerificationServlet extends HttpServlet {
@@ -33,7 +27,7 @@ public class VerificationServlet extends HttpServlet {
             throws ServletException, IOException {
         LoginForm loginForm = new LoginForm(request.getParameter("hande_text_field"),
                 request.getParameter("password_text_field"));
-        if (Controller.VerifyEmail(loginForm)) {
+        if (Controller.VerifyLoginForm(loginForm)) {
             request.setAttribute("handle", loginForm.getHandle());
             request.setAttribute("page", 0); // 0-indexed
             Controller.RequestContainer container = new Controller.RequestContainer(request);
