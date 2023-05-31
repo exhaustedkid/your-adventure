@@ -4,14 +4,19 @@ import com.yadv.your_adventure.account.LoginForm;
 import com.yadv.your_adventure.dao.PictureManagerJDBC;
 import com.yadv.your_adventure.dao.UserInfoManagerJDBC;
 import javafx.util.Pair;
-
+import org.apache.logging.log4j.Level;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Objects;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Controller {
 
     static final int count_pictures_on_page = 3;
+//    static Logger logger = Logger.getLogger(Controller.class);
+    static Logger logger = LogManager.getLogger(Controller.class);
+
 
     public enum CONFIGURE_PAGE_MODE {
         profile,
@@ -19,10 +24,14 @@ public class Controller {
     }
 
     public static void ConfigurePage(RequestContainer request, CONFIGURE_PAGE_MODE mode) {
-        String page_info = request.request.getParameter("page");
         int page = 0; // here page 0-indexed
-        if (page_info != null) {
+        try {
+            logger.info("getting the number of page");
+            String page_info = request.request.getParameter("page");
             page = Integer.parseInt(page_info);
+            logger.info("successful getting the number of page");
+        } catch (Exception e) {
+            logger.error("", e);
         }
         ArrayList<Pair<String, String>> images = new ArrayList<>();
         if (mode == CONFIGURE_PAGE_MODE.community) {
