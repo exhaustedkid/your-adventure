@@ -31,6 +31,10 @@ function convert() {
 
 
 function onCloudSave() {
+    if (handle === '') {
+        alert('To share an image you need to authorise first');
+        return;
+    }
     let req = new XMLHttpRequest();
     req.open("POST", "save");
     let date = process_date(new Date);
