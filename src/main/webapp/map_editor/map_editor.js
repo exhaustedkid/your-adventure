@@ -38,8 +38,14 @@ function onCloudSave() {
     let req = new XMLHttpRequest();
     req.open("POST", "save");
     let date = process_date(new Date);
+    let json_package = {
+        handle: handle,
+        date: date,
+        image: canvas.toDataURL()
+    }
+    let json = JSON.stringify(json_package);
     alert('Your work published!');
-    req.send(handle + '\n' + date + '\n' + canvas.toDataURL());
+    req.send(json);
 }
 
 function process_date(date) {

@@ -22,8 +22,9 @@
         <button type="button" title="Save map on cloud" onclick="onCloudSave()" class="btn"><i class="fa-solid fa-cloud-upload"></i></button>
         <button type="button" title="Load map from device" onclick="onLoad()" class="btn"><i class="fa-solid fa-folder-open"></i></button>
         <form name="home" action="load" method="POST">
-            <input type="submit" name="button" value="Home" class="special_btn"><i class="fa-solid fa-home"></i>
+            <input type="submit" name="button" value="Home" class="special_btn">
             <input type="hidden" name="handle" value="${handle}">
+            <input type="hidden" name="page" value=${page}>
         </form>
 <%--        <button type="button" title="Home" onclick="toHome()" class="special_btn"><i class="fa-solid fa-home"></i></button>--%>
         <button type="button" title="Pencil" onclick="pencil()" class="btn"><i class="fa-solid fa-pencil"></i></button>

@@ -2,6 +2,7 @@ package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.dao.PictureManagerJDBC;
 import javafx.util.Pair;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
@@ -37,30 +38,12 @@ public class LoadPicServlet extends HttpServlet {
             throws ServletException, IOException {
 
         ServletInputStream stream = request.getInputStream();
-
-        int c = 0;
-        StringBuilder handle = new StringBuilder();
-
-        while (true) {
-            c = stream.read();
-            if (c == 10) break;
-            handle.append((char)c);
-        } // c != (int)'\n'
-
-        c = 0;
-        StringBuilder date = new StringBuilder();
-        while (true) {
-            c = stream.read();
-            if (c == 10) break;
-            date.append((char)c);
-        } // c != (int)'\n'
-
         byte[] buf = new byte[128];
         ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
         for (int bytesRead = 0; bytesRead != -1; bytesRead = stream.read(buf)) {
             bufOut.write(buf, 0, bytesRead);
         }
-
-        Controller.SavePicture(bufOut.toString(), handle.toString(), date.toString());
+        JSONObject json = new JSONObject(bufOut.toString());
+        Controller.SavePicture(json.getString("image"), json.getString("handle"), json.getString("date"));
     }
 }

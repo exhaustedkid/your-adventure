@@ -10,7 +10,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        PropertyConfigurator.configure("/home/zolokinos/your-adventure/src/main/webapp/WEB-INF/log4j.properties");
+        PropertyConfigurator.configure("/home/egorka/IdeaProjects/your-adventure/src/main/webapp/WEB-INF/log4j.properties");
     }
 
     @Override
