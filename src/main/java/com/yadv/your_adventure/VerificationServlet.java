@@ -1,13 +1,10 @@
 package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.account.LoginForm;
-import com.yadv.your_adventure.dao.PictureManagerJDBC;
-import com.yadv.your_adventure.dao.UserInfoManagerJDBC;
-import javafx.util.Pair;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,16 +14,24 @@ import java.io.IOException;
 
 @WebServlet("/sign_in")
 public class VerificationServlet extends HttpServlet {
-    static final Logger logger = Logger.getLogger(VerificationServlet.class);
+    static private Logger logger = Logger.getLogger(VerificationServlet.class);
+    static private Logger logger2 = Logger.getRootLogger();
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        logger.log(Level.INFO, "doGet method called");
         processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        logger.log(Level.INFO, "doPost method called");
         processRequest(request, response);
     }
 
@@ -34,20 +39,19 @@ public class VerificationServlet extends HttpServlet {
             throws ServletException, IOException {
         LoginForm loginForm = new LoginForm(request.getParameter("hande_text_field"),
                 request.getParameter("password_text_field"));
-        logger.log(Level.INFO, "Starting verifying e-mail");
-        if (Controller.VerifyEmail(loginForm)) {
-            logger.log(Level.INFO, "Set Attributes");
+        logger.log(Level.INFO, "try to log in");
+        if (Controller.VerifyLoginForm(loginForm)) {
+            logger.log(Level.INFO, "Setting 'handle' and 'page' attributes");
             request.setAttribute("handle", loginForm.getHandle());
             request.setAttribute("page", 0); // 0-indexed
-            logger.log(Level.INFO, "Creating Controller.RequestContainer");
+            logger.log(Level.INFO, "controller proceeding");
             Controller.RequestContainer container = new Controller.RequestContainer(request);
             Controller.ConfigurePage(container, Controller.CONFIGURE_PAGE_MODE.community);
-            String jsp = "/community.jsp";
-            logger.log(Level.WARN, "forwarding to" + jsp);
-            request.getRequestDispatcher(jsp).forward(request, response);
+            request.setAttribute("handle", loginForm.getHandle()); // bad
+            logger.log(Level.INFO, "forwarding to community.jsp");
+            request.getRequestDispatcher("/community.jsp").forward(request, response);
         }
         else {
-            logger.log(Level.WARN, "The password is incorrect");
             request.setAttribute("login_status", "Wrong handle or password");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
