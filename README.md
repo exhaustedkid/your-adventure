@@ -50,4 +50,6 @@ To run project you need
 - run file BeginJDBC to create server tables -- change filename, and testjdbc file --
 - edit configuration like this ![configurations](https://github.com/exhaustedkid/your-adventure/blob/readme/Resources/Screenshots/configuration.png)
 - set tomcat path ![tomcat_path](https://github.com/exhaustedkid/your-adventure/blob/readme/Resources/Screenshots/tomcat_path.png)
+- go to file src/main/webapp/WEB-INF/log4j.properties and change the value of log4j.appender.file.File to desired path of your OS
+- go to com/yadv/your_adventure/ContextListener.java and set the path to your log4j.properties
 - run project
