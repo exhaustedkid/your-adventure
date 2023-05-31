@@ -2,6 +2,7 @@
 <style>
     <%@include file='/css/style.css' %>
 </style>
+
 <!DOCTYPE html>
 <html>
 <head>
