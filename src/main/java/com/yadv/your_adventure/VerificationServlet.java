@@ -1,8 +1,9 @@
 package com.yadv.your_adventure;
 
 import com.yadv.your_adventure.account.LoginForm;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,8 +15,7 @@ import java.io.IOException;
 
 @WebServlet("/sign_in")
 public class VerificationServlet extends HttpServlet {
-    static private Logger logger = Logger.getLogger(VerificationServlet.class);
-    static private Logger logger2 = Logger.getRootLogger();
+    static Logger logger = LogManager.getLogger(Controller.class);
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
